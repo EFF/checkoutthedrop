@@ -4,10 +4,18 @@ stylus = require 'stylus'
 express = require 'express'
 path = require 'path'
 http = require 'http'
+nib = require 'nib'
 
-publicDirectory = path.join __dirname, '../build'
-stylusSource = path.join __dirname, '../client/stylesheets/'
-stylusDestination = path.join __dirname, '../build/stylesheets/'
+publicDirectory = path.join __dirname, '../client'
+stylusSource = path.join __dirname, '/views/stylesheets/'
+stylusDestination = path.join __dirname, '../client/stylesheets/'
+
+compileStylus = (str, path)->
+    return stylus(str)
+        .set('filename', path)
+        .set('compress', true)
+        .use(nib())
+        .import('nib')
 
 app = express()
 
@@ -18,7 +26,7 @@ app.configure () ->
 
     app.use express.logger('dev')
 
-    app.use stylus.middleware({src : stylusSource, dest: stylusDestination})
+    app.use stylus.middleware({src : stylusSource, dest: stylusDestination, compile : compileStylus})
     app.use express.static(publicDirectory)
 
     app.use express.bodyParser()
