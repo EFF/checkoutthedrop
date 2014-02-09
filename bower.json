@@ -1,0 +1,13 @@
+{
+  "name": "check out the drop",
+  "version": "0.0.1",
+  "main": "/client/stylesheets/style.css",
+  "ignore": [
+    "**/*.txt"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.9",
+    "angular-bootstrap": "~0.10.0"
+  },
+  "devDependencies": {}
+}
