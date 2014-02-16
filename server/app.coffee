@@ -5,6 +5,7 @@ express = require 'express'
 path = require 'path'
 http = require 'http'
 nib = require 'nib'
+mongoose = require 'mongoose'
 
 publicDirectory = path.join __dirname, '../client'
 stylusSource = path.join __dirname, '/views/stylesheets/'
@@ -19,18 +20,21 @@ compileStylus = (str, path)->
 
 app = express()
 
+mongoose.connect 'mongodb://2.2.2.2:27017/test'
+require './models/drop'
+
 app.configure () ->
     app.use express.static(publicDirectory)
     app.set 'views', __dirname + '/views'
     app.set 'view engine', 'jade'
 
     app.use express.logger('dev')
-
     app.use stylus.middleware({src : stylusSource, dest: stylusDestination, compile : compileStylus})
     app.use express.static(publicDirectory)
-
     app.use express.bodyParser()
     app.use express.methodOverride()
+    app.disable 'x-powered-by'
+
     app.use app.router
 
 app.get '/', (req, res) ->
