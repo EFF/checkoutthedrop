@@ -6,6 +6,7 @@ path = require 'path'
 http = require 'http'
 nib = require 'nib'
 mongoose = require 'mongoose'
+interactor = require './interactor'
 
 publicDirectory = path.join __dirname, '../client'
 stylusSource = path.join __dirname, '/views/stylesheets/'
@@ -20,7 +21,7 @@ compileStylus = (str, path)->
 
 app = express()
 
-mongoose.connect 'mongodb://2.2.2.2:27017/test'
+mongoose.connect 'mongodb://localhost:27017/test'
 require './models/drop'
 
 app.configure () ->
@@ -39,6 +40,14 @@ app.configure () ->
 
 app.get '/', (req, res) ->
     res.render 'index'
+
+app.post '/drop', (req, res) ->
+    body = req.body
+    interactor.createDrop body.soundcloudUrl, body.requesterEmail, body.requesterType, body.dropTime, (err, data)->
+        if err
+            res.json 500, err
+        else
+            res.send data
 
 port = process.env.PORT || 3000
 
