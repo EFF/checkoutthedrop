@@ -24,19 +24,22 @@ body
             .col-md-6
                 .form
                     h2 Submit your drop
-                    form.soundcloud_form
+                    form.soundcloud_form(ng-submit="createDrop(newDrop)")
                         .form-group
                             label Soundcloud url
-                            input.form-control(type="url")
+                            input.form-control(type="url" ng-model="newDrop.soundcloudUrl" placeholder="https://soundcloud.com/angelzofficial/paradise-angels-in-the-air")
                         .form-group
                             label Drop time
-                            input.form-control.col-md-1(placeholder="0:55")
+                            input.form-control.col-md-1(placeholder="0:55" ng-model="newDrop.dropTime")
                         .radio
                             label I'm a god damn edm fan!
-                                input(type="radio", name="fanType", value="edm_fan")
+                                input(type="radio", name="requesterType", value="edmFan" ng-model="newDrop.requesterType" required)
                         .radio
                             label I'm a DJ / Producer
-                                input(type="radio", name="fanType", value="dj" checked)
+                                input(type="radio", name="requesterType", value="dj" ng-model="newDrop.requesterType")
+                        .form-group
+                            label Email
+                            input.form-control(type="Email" ng-model="newDrop.requesterEmail")
                         button.btn.btn-default.btn-lg(type="submit") Submit
 
             .col-md-6
@@ -46,5 +49,8 @@ body
     footer
         p Developed by <a href="http://twitter.com/frankpoulin"> @frankpoulin</a> and supportted by <a href="http://soundcloud.com/angelzofficial">ANGELZ</a>
 
-script(data-main="/javascripts/main" src="/lib/requirejs/require.js")
+//- script(data-main="/javascripts/main" src="/lib/requirejs/require.js")
+script(src="/lib/angular/angular.min.js")
+script(src="/lib/angular-resource/angular-resource.min.js")
+script(src="/javascripts/compressed-app.js")
 
