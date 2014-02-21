@@ -8,9 +8,13 @@ nib = require 'nib'
 mongoose = require 'mongoose'
 interactor = require './interactor'
 
-publicDirectory = path.join __dirname, '../client'
+if process.env.NODE_ENV == 'prod' 
+    client = '../build'
+    stylesheetsDest = '../build/stylesheets'
+
+publicDirectory = path.join __dirname, client || '../client'
 stylusSource = path.join __dirname, '/views/stylesheets/'
-stylusDestination = path.join __dirname, '../client/stylesheets/'
+stylusDestination = path.join __dirname, stylesheetsDest || '../client/stylesheets/'
 
 compileStylus = (str, path)->
     return stylus(str)
@@ -21,7 +25,7 @@ compileStylus = (str, path)->
 
 app = express()
 
-mongoose.connect 'mongodb://localhost:27017/test'
+mongoose.connect 'mongodb://0.0.0.0:27017/test'
 require './models/drop'
 
 app.configure () ->

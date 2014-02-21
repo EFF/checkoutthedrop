@@ -16,31 +16,31 @@ body
         .container
             .row.caption_container
                 h3 listen, get inspired
-                h3 procude, inspire others
-        .scroll
+                h3 produce, inspire others
+        .scroll(scroll-on-click scroll-to-id="#formSection")
 
-    section(ng-controller="HomeController")
+    section(id="formSection" ng-controller="HomeController")
         .container
             .col-md-6
                 .form
                     h2 Submit your drop
-                    form.soundcloud_form(ng-submit="createDrop(newDrop)")
+                    form.soundcloud_form(name="drop_form" ng-submit="createDrop(newDrop)" novalidate)
                         .form-group
                             label Soundcloud url
-                            input.form-control(type="url" ng-model="newDrop.soundcloudUrl" placeholder="https://soundcloud.com/angelzofficial/paradise-angels-in-the-air")
+                            input.form-control(type="url" ng-model="newDrop.soundcloudUrl" placeholder="https://soundcloud.com/angelzofficial/paradise-angels-in-the-air" ng-pattern="soundcloudREGEX" required)
                         .form-group
                             label Drop time
-                            input.form-control.col-md-1(placeholder="0:55" ng-model="newDrop.dropTime")
+                            input.form-control.col-md-1(placeholder="0:55" ng-model="newDrop.dropTime" required ng-pattern="timeREGEX")
+                        .form-group
+                            label Email
+                            input.form-control(type="Email" placeholder="superDJ@gmail.com" ng-model="newDrop.requesterEmail" required)
                         .radio
-                            label I'm a god damn edm fan!
+                            label I'm an edm fan!
                                 input(type="radio", name="requesterType", value="edmFan" ng-model="newDrop.requesterType" required)
                         .radio
                             label I'm a DJ / Producer
                                 input(type="radio", name="requesterType", value="dj" ng-model="newDrop.requesterType")
-                        .form-group
-                            label Email
-                            input.form-control(type="Email" ng-model="newDrop.requesterEmail")
-                        button.btn.btn-default.btn-lg(type="submit") Submit
+                        button.btn.btn-default.btn-lg(type="submit" ng-disabled="drop_form.$invalid") Submit
 
             .col-md-6
                 .insta
@@ -49,8 +49,8 @@ body
     footer
         p Developed by <a href="http://twitter.com/frankpoulin"> @frankpoulin</a> and supportted by <a href="http://soundcloud.com/angelzofficial">ANGELZ</a>
 
-//- script(data-main="/javascripts/main" src="/lib/requirejs/require.js")
 script(src="/lib/angular/angular.min.js")
 script(src="/lib/angular-resource/angular-resource.min.js")
-script(src="/javascripts/compressed-app.js")
+script(src="./lib/jquery/jquery.min.js")
+script(src="/javascripts/app.js")
 

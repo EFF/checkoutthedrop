@@ -7,7 +7,7 @@ module.exports = (grunt) ->
                     file: './server/app.coffee'
                     # env: grunt.file.readJSON "./server/env.dev.json"
                     watchedFolders: ['server']
-                    watchedExtensions: ['coffee']
+                    watchedExtensions: ['coffee', 'styl']
 
     grunt.initConfig config
 

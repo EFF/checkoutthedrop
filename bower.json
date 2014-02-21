@@ -6,9 +6,11 @@
     "**/*.txt"
   ],
   "dependencies": {
-    "requirejs": "~2.1.9",
-    "angular-bootstrap": "~0.10.0",
-    "angular-resource": "~1.2.13"
+    "angular": "~1.2.x",
+    "angular-resource": "~1.2.x",
+    "jquery": "~1.9.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "angular-mocks": "~1.2.x"
+  }
 }
