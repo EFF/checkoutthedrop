@@ -1,6 +1,7 @@
 {
   "name": "checkoutthedrop",
   "version": "0.1.0",
+  "main" : "./server/app.coffee",
   "dependencies": {
     "jade": "~0.35.0",
     "express": "~3.3.5",

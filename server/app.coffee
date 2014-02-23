@@ -25,7 +25,7 @@ compileStylus = (str, path)->
 
 app = express()
 
-mongoose.connect process.env.MONGO_URL || 'mongodb://0.0.0.0:27017/test'
+mongoose.connect process.env.MONGOLAB_URI || 'mongodb://0.0.0.0:27017/test'
 require './models/drop'
 
 app.configure () ->
