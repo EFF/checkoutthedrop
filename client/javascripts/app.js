@@ -1,16 +1,16 @@
 var module = angular.module('checkoutthedrop', ['ngResource']);
 
-module.controller('HomeController', function($scope, $resource){
-	$scope.soundcloudREGEX = /^https?:\/\/(soundcloud.com|snd.sc)\/(.*)$/;
-	$scope.timeREGEX = /^[0-9]:[0-5][0-9]$/;
-	var Drop = $resource('/drop');
+var HomeController = function($scope, $resource){
+    $scope.soundcloudREGEX = /^https?:\/\/(soundcloud.com|snd.sc)\/(.*)$/;
+    $scope.timeREGEX = /^[0-9]:[0-5][0-9]$/;
+    var Drop = $resource('/drop');
 
-	$scope.createDrop = function(dropInfo){
-		Drop.save([], dropInfo);
-	};
-});
+    $scope.createDrop = function(dropInfo){
+        Drop.save([], dropInfo);
+    };
+};
 
-module.directive('scrollOnClick', function () {
+var scrollOnClick = function () {
         return{
             restrict: 'A',
             link: function (scope, elem, attrs) {
@@ -20,6 +20,9 @@ module.directive('scrollOnClick', function () {
                 });
             }
         };
-    });
+    };
+
+module.controller('HomeController', ['$scope', '$resource', HomeController]);
+module.directive('scrollOnClick', scrollOnClick);
 
 angular.bootstrap(document, ['checkoutthedrop']);

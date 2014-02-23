@@ -10,7 +10,7 @@ interactor = require './interactor'
 
 if process.env.NODE_ENV == 'prod' 
     client = '../build'
-    stylesheetsDest = '../build/stylesheets'
+    stylesheetsDest = '../build/stylesheets/'
 
 publicDirectory = path.join __dirname, client || '../client'
 stylusSource = path.join __dirname, '/views/stylesheets/'
@@ -25,7 +25,7 @@ compileStylus = (str, path)->
 
 app = express()
 
-mongoose.connect 'mongodb://0.0.0.0:27017/test'
+mongoose.connect process.env.MONGO_URL || 'mongodb://0.0.0.0:27017/test'
 require './models/drop'
 
 app.configure () ->
@@ -43,7 +43,7 @@ app.configure () ->
     app.use app.router
 
 app.get '/', (req, res) ->
-    res.render 'index'
+    res.render 'index', {nodeEnv : process.env.NODE_ENV}
 
 app.post '/drop', (req, res) ->
     body = req.body
