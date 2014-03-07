@@ -1,12 +1,25 @@
-var module = angular.module('checkoutthedrop', ['ngResource']);
+var module = angular.module('checkoutthedrop', ['angular-flash.service', 'angular-flash.flash-alert-directive', 'ngResource'])
+        .config(function (flashProvider){
+            flashProvider.errorClassnames.push('alert-danger');
+            flashProvider.errorClassnames.push('alert-success');
+        });
 
-var HomeController = function($scope, $resource){
+var HomeController = function($scope, $resource, flash){
     $scope.soundcloudREGEX = /^https?:\/\/(soundcloud.com|snd.sc)\/(.*)$/;
     $scope.timeREGEX = /^[0-9]:[0-5][0-9]$/;
     var Drop = $resource('/drop');
 
+    var createSuccessCallback = function(data){
+        flash.success = "Thanks for supporting the movement";
+        $scope.newDrop = {};
+    };
+
+    var errorCallback = function(err){
+        flash.error = err.data;
+    };
+
     $scope.createDrop = function(dropInfo){
-        Drop.save([], dropInfo);
+        Drop.save([], dropInfo, createSuccessCallback, errorCallback);
     };
 };
 
@@ -22,7 +35,7 @@ var scrollOnClick = function () {
         };
     };
 
-module.controller('HomeController', ['$scope', '$resource', HomeController]);
+module.controller('HomeController', ['$scope', '$resource', 'flash', HomeController]);
 module.directive('scrollOnClick', scrollOnClick);
 
 angular.bootstrap(document, ['checkoutthedrop']);

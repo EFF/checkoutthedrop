@@ -5,20 +5,16 @@ class Interactor
 		Drop = mongoose.model 'Drop'
 
 		# TODO: refactor this in a middleware 
-		if @isUnique(soundcloudUrl)
-			drop =
-				soundcloudUrl : soundcloudUrl
-				requesterEmail : requesterEmail
-				requesterType : requesterType
-				dropTime : dropTime
+		drop =
+			soundcloudUrl : soundcloudUrl
+			requesterEmail : requesterEmail
+			requesterType : requesterType
+			dropTime : dropTime
 
-			Drop.create drop, callback
-		else
-			callback 'this song has already been suggested'
-
-	isUnique: (soundcloudUrl) =>
-		return true
-		# Drop.findOne {"soundcloudUrl : #{soundcloudUrl}"} (err, person)->
-		# 	return not person
+		Drop.create drop, (err, data) =>
+			if err
+				callback 'drop has already been suggested'
+			else
+				callback null, data
 
 module.exports = new Interactor()

@@ -1,7 +1,7 @@
 {
   "name": "checkoutthedrop",
   "version": "0.1.0",
-  "main" : "./server/app.coffee",
+  "main": "./server/app.coffee",
   "dependencies": {
     "jade": "~0.35.0",
     "express": "~3.3.5",
@@ -20,7 +20,8 @@
     "bower": "~1.2.8",
     "grunt-contrib-uglify": "~0.3.2",
     "grunt-contrib-cssmin": "~0.8.0",
-    "grunt-contrib-copy": "~0.5.0"
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-shell": "~0.6.4"
   },
   "engines": {
     "node": "0.10.x"
