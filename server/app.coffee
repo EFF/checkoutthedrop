@@ -33,12 +33,11 @@ app.configure () ->
     app.set 'views', __dirname + '/views'
     app.set 'view engine', 'jade'
 
+    app.use express.favicon("#{publicDirectory}/images/favicon.png")
     app.use express.logger('dev')
     app.use stylus.middleware({src : stylusSource, dest: stylusDestination, compile : compileStylus})
-    app.use express.static(publicDirectory)
     app.use express.bodyParser()
     app.use express.methodOverride()
-    app.use express.favicon("#{publicDirectory}/images/favicon.ico")
     app.disable 'x-powered-by'
 
 
