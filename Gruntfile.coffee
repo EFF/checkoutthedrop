@@ -10,7 +10,7 @@ module.exports = (grunt) ->
         copy:
             main:
                 files: [
-                    {expand: true, cwd: './client',src: ['lib/**/*'], dest: 'build'}
+                    {expand: true, cwd: './client',src: ['lib/**/*', 'images/**'], dest: 'build'}
                 ]
         uglify:
             build:
@@ -38,4 +38,4 @@ module.exports = (grunt) ->
     grunt.registerTask 'default', ['concurrent:target']
     grunt.registerTask 'server', ['nodemon']
 
-    grunt.registerTask 'build', ['copy', 'uglify', 'imagemin']
+    grunt.registerTask 'build', ['copy', 'uglify']
