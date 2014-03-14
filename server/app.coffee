@@ -12,9 +12,9 @@ if process.env.NODE_ENV == 'prod'
     client = '../build'
     stylesheetsDest = '../build/stylesheets/'
 
-publicDirectory = path.join __dirname, client || '../build'
+publicDirectory = path.join __dirname, client || '../client'
 stylusSource = path.join __dirname, '/views/stylesheets/'
-stylusDestination = path.join __dirname, stylesheetsDest || '../build/stylesheets/'
+stylusDestination = path.join __dirname, stylesheetsDest || '../client/stylesheets/'
 
 compileStylus = (str, path)->
     return stylus(str)
@@ -38,14 +38,14 @@ app.configure () ->
     app.use express.static(publicDirectory)
     app.use express.bodyParser()
     app.use express.methodOverride()
+    app.use express.favicon("#{publicDirectory}/images/favicon.ico")
     app.disable 'x-powered-by'
+
 
     app.use app.router
 
 app.get '/', (req, res) ->
-    # res.render 'index', {nodeEnv : process.env.NODE_ENV}
-    res.render 'index', {nodeEnv : 'prod'}
-
+    res.render 'index', {nodeEnv : process.env.NODE_ENV}
 
 app.post '/drop', (req, res) ->
     body = req.body
