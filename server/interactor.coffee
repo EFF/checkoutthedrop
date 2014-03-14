@@ -13,7 +13,7 @@ class Interactor
 
 		Drop.create drop, (err, data) =>
 			if err
-				callback 'drop has already been suggested'
+				callback 'This drop has already been suggested'
 			else
 				callback null, data
 

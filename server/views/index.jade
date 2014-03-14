@@ -7,8 +7,12 @@ html(lang="en")
         meta(name="apple-mobile-web-app-capable", content="yes")
         meta(name="apple-mobile-web-app-status-bar-style", content="blue")
 body
-    .alert.fade(flash-alert active-class="in")
-        strong.alert-heading Ahhh
+    .alert.fade(flash-alert="error" active-class="in")
+        strong.alert-heading Ah Snap !  
+        span.alert-message {{flash.message}}
+
+    .alert.fade(flash-alert="success" active-class="in")
+        strong.alert-heading Yay !  
         span.alert-message {{flash.message}}
     header
         .ribbon

@@ -1,7 +1,7 @@
 var module = angular.module('checkoutthedrop', ['angular-flash.service', 'angular-flash.flash-alert-directive', 'ngResource'])
         .config(function (flashProvider){
             flashProvider.errorClassnames.push('alert-danger');
-            flashProvider.errorClassnames.push('alert-success');
+            flashProvider.successClassnames.push('alert-success');
         });
 
 var HomeController = function($scope, $resource, flash){
@@ -10,7 +10,7 @@ var HomeController = function($scope, $resource, flash){
     var Drop = $resource('/drop');
 
     var createSuccessCallback = function(data){
-        flash.success = "Thanks for supporting the movement";
+        flash.success = "Thanks for submitting your drop !";
         $scope.newDrop = {};
     };
 
