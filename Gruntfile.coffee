@@ -10,11 +10,16 @@ module.exports = (grunt) ->
         copy:
             main:
                 files: [
-                    {expand: true, cwd: './client',src: ['lib/**/*', 'images/*'], dest: 'build'}
+                    {expand: true, cwd: './client',src: ['lib/**/*'], dest: 'build'}
                 ]
         uglify:
             build:
                 files: {'./build/script/app.min.js' : ['./client/javascripts/**/*.js']}
+        imagemin:
+            default:
+                options:
+                    optimizationLevel: 4
+                files: [{expand: true, cwd: './client',src: ['images/*'], dest: 'build'}]
         shell:
             mongo:
                 command: 'mongod'
@@ -28,8 +33,9 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks 'grunt-concurrent'
     grunt.loadNpmTasks 'grunt-contrib-uglify'
     grunt.loadNpmTasks 'grunt-contrib-copy'
+    grunt.loadNpmTasks 'grunt-contrib-imagemin'
 
     grunt.registerTask 'default', ['concurrent:target']
     grunt.registerTask 'server', ['nodemon']
 
-    grunt.registerTask 'build', ['copy', 'uglify']
+    grunt.registerTask 'build', ['copy', 'uglify', 'imagemin']
