@@ -16,5 +16,6 @@ header .scroll{height:50px;width:50px;background-image:url("/images/scroll.png")
 .form .soundcloud_form{margin-top:50px;}
 .form .soundcloud_form label{font-size:1.5em}
 .insta{padding-top:30px;text-align:center}
-.alert{position:fixed;top:50px;right:50px;z-index:1000;width:300px}
+.alert{position:fixed;top:50px;right:50px;z-index:1000;width:300px;}
+.alert strong{margin-right:15px}
 footer{text-align:center;color:#fff;padding-top:20px;height:60px;background-color:#631a15}

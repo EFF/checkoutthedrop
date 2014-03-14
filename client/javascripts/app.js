@@ -1,9 +1,9 @@
 var module = angular.module('checkoutthedrop', ['angular-flash.service', 'angular-flash.flash-alert-directive', 'ngResource'])
-        .config(function (flashProvider){
+    .config(['flashProvider', function (flashProvider){
             flashProvider.errorClassnames.push('alert-danger');
             flashProvider.successClassnames.push('alert-success');
-        });
-
+        }]);
+        
 var HomeController = function($scope, $resource, flash){
     $scope.soundcloudREGEX = /^https?:\/\/(soundcloud.com|snd.sc)\/(.*)$/;
     $scope.timeREGEX = /^[0-9]:[0-5][0-9]$/;

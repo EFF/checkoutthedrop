@@ -12,9 +12,9 @@ if process.env.NODE_ENV == 'prod'
     client = '../build'
     stylesheetsDest = '../build/stylesheets/'
 
-publicDirectory = path.join __dirname, client || '../client'
+publicDirectory = path.join __dirname, client || '../build'
 stylusSource = path.join __dirname, '/views/stylesheets/'
-stylusDestination = path.join __dirname, stylesheetsDest || '../client/stylesheets/'
+stylusDestination = path.join __dirname, stylesheetsDest || '../build/stylesheets/'
 
 compileStylus = (str, path)->
     return stylus(str)
@@ -43,13 +43,15 @@ app.configure () ->
     app.use app.router
 
 app.get '/', (req, res) ->
-    res.render 'index', {nodeEnv : process.env.NODE_ENV}
+    # res.render 'index', {nodeEnv : process.env.NODE_ENV}
+    res.render 'index', {nodeEnv : 'prod'}
+
 
 app.post '/drop', (req, res) ->
     body = req.body
     interactor.createDrop body.soundcloudUrl, body.requesterEmail, body.requesterType, body.dropTime, (err, data)->
         if err
-            res.json 500, err
+            res.json 400, err
         else
             res.send data
 

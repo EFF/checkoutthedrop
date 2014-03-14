@@ -3,8 +3,7 @@ mongoose = require 'mongoose'
 class Interactor
 	createDrop: (soundcloudUrl, requesterEmail, requesterType, dropTime, callback) =>
 		Drop = mongoose.model 'Drop'
-
-		# TODO: refactor this in a middleware 
+ 
 		drop =
 			soundcloudUrl : soundcloudUrl
 			requesterEmail : requesterEmail
