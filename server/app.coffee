@@ -1,3 +1,4 @@
+require 'newrelic'
 async = require 'async'
 request = require 'request'
 stylus = require 'stylus'
