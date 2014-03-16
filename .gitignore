@@ -4,3 +4,4 @@ build
 client/lib
 dist
 .env
+*log
