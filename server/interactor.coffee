@@ -15,5 +15,14 @@ class Interactor
 				callback 'This drop has already been suggested'
 			else
 				callback null, data
+	getRandomDrop: (callback) =>
+		Drop = mongoose.model 'Drop'
+
+		Drop.count (err, count) =>
+			if err
+				callback err
+				
+			skip = Math.floor(Math.random() * count)
+			Drop.findOne().skip(skip).exec(callback)	
 
 module.exports = new Interactor()

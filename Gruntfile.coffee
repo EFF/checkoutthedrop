@@ -30,12 +30,9 @@ module.exports = (grunt) ->
 
     grunt.loadNpmTasks 'grunt-shell'
     grunt.loadNpmTasks 'grunt-nodemon'
-    grunt.loadNpmTasks 'grunt-concurrent'
     grunt.loadNpmTasks 'grunt-contrib-uglify'
     grunt.loadNpmTasks 'grunt-contrib-copy'
-    grunt.loadNpmTasks 'grunt-contrib-imagemin'
 
-    grunt.registerTask 'default', ['concurrent:target']
     grunt.registerTask 'server', ['nodemon']
 
     grunt.registerTask 'build', ['copy', 'uglify']

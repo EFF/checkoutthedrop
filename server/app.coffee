@@ -1,4 +1,3 @@
-require 'newrelic'
 async = require 'async'
 request = require 'request'
 stylus = require 'stylus'
@@ -8,6 +7,9 @@ http = require 'http'
 nib = require 'nib'
 mongoose = require 'mongoose'
 interactor = require './interactor'
+
+if process.env.NODE_ENV == 'prod'
+    require 'newrelic'
 
 if process.env.NODE_ENV == 'prod' 
     client = '../build'
@@ -52,6 +54,13 @@ app.post '/drop', (req, res) ->
     interactor.createDrop body.soundcloudUrl, body.requesterEmail, body.requesterType, body.dropTime, (err, data)->
         if err
             res.json 400, err
+        else
+            res.send data
+
+app.get '/drops/random', (req, res) =>
+    interactor.getRandomDrop (err, data) ->
+        if err
+            res.json 500, err
         else
             res.send data
 
