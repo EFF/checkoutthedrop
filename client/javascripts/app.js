@@ -1,4 +1,4 @@
-var module = angular.module('checkoutthedrop', ['angular-flash.service', 'angular-flash.flash-alert-directive', 'ngResource'])
+var module = angular.module('checkoutthedrop', ['angular-flash.service', 'angular-flash.flash-alert-directive', 'ngResource', 'angulartics', 'angulartics.google.analytics'])
     .config(['flashProvider', function (flashProvider){
             flashProvider.errorClassnames.push('alert-danger');
             flashProvider.successClassnames.push('alert-success');
