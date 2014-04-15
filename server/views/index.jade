@@ -12,7 +12,7 @@ body
         span.alert-message {{flash.message}}
 
     .alert.fade(flash-alert="success" active-class="in")
-        strong.alert-heading Yay !  
+        strong.alert-heading Yay !
         span.alert-message {{flash.message}}
     header
         .ribbon
@@ -25,6 +25,13 @@ body
                 h3 listen, get inspired
                 h3 produce, inspire others
         .scroll(scroll-on-click scroll-to-id="#formSection")
+
+    section(id="soundCloudDropSection" ng-controller="DropPlayerController")
+        .container
+            object(height="81" width="100%" id="yourPlayerId" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000")
+                param(name="movie" value="http://player.soundcloud.com/player.swf?url=http%3A%2F%2Fsoundcloud.com%2Fmatas%2Fhobnotropic&enable_api=true&object_id=yourPlayerId")
+                param(name="allowscriptaccess" value="always")
+                embed(allowscriptaccess="always" height="81" src="http://player.soundcloud.com/player.swf?url=http%3A%2F%2Fsoundcloud.com%2Fmatas%2Fhobnotropic&enable_api=true&object_id=yourPlayerId" type="application/x-shockwave-flash" width="100%" name="yourPlayerId")
 
     section(id="formSection" ng-controller="HomeController")
         .container
@@ -61,6 +68,11 @@ script(src="/lib/angular-flash/dist/angular-flash.min.js")
 script(src="/lib/jquery/jquery.min.js")
 script(src="/lib/angulartics/dist/angulartics.min.js")
 script(src="/lib/angulartics/dist/angulartics-ga.min.js")
+script(src="/lib/soundcloud.custom.player/js/soundcloud.player.api.js")
+script.
+   soundcloud.addEventListener('onPlayerReady', function(player, data) {
+     player.api_play();
+   });
 if locals.nodeEnv
     script(src="/script/app.min.js")
 else

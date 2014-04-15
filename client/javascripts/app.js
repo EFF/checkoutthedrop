@@ -3,10 +3,11 @@ var module = angular.module('checkoutthedrop', ['angular-flash.service', 'angula
             flashProvider.errorClassnames.push('alert-danger');
             flashProvider.successClassnames.push('alert-success');
         }]);
-        
-var HomeController = function($scope, $resource, flash){
+
+var HomeController = function($scope, $resource, flash, DropService){
     $scope.soundcloudREGEX = /^https?:\/\/(soundcloud.com|snd.sc)\/(.*)$/;
     $scope.timeREGEX = /^[0-9]:[0-5][0-9]$/;
+
     var Drop = $resource('/drop');
 
     var createSuccessCallback = function(data){
@@ -21,6 +22,29 @@ var HomeController = function($scope, $resource, flash){
     $scope.createDrop = function(dropInfo){
         Drop.save([], dropInfo, createSuccessCallback, errorCallback);
     };
+
+};
+
+var DropPlayerController = function($scope, DropService){
+
+    var getDropSuccessCallback = function (data) {
+      $scope.current_drop = data;
+    };
+    DropService.getRandom(getDropSuccessCallback);
+};
+
+var DropService = function ($http) {
+    var service = {};
+
+    service.getRandom = function (successCallback){
+            $http.get('/drops/random')
+              .success(successCallback)
+              .error(function (err){
+                console.log(err);
+              });
+    };
+
+    return service;
 };
 
 var scrollOnClick = function () {
@@ -35,7 +59,9 @@ var scrollOnClick = function () {
         };
     };
 
-module.controller('HomeController', ['$scope', '$resource', 'flash', HomeController]);
+module.factory('DropService', ['$http', DropService]);
+module.controller('DropPlayerController', ['$scope', 'DropService', DropPlayerController]);
+module.controller('HomeController', ['$scope', '$resource', 'flash', 'DropService', HomeController]);
 module.directive('scrollOnClick', scrollOnClick);
 
 angular.bootstrap(document, ['checkoutthedrop']);

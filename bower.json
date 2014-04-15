@@ -10,7 +10,8 @@
     "angular-resource": "~1.2.x",
     "jquery": "~1.9.1",
     "angular-flash": "~0.1.12",
-    "angulartics": "~0.14.15"
+    "angulartics": "~0.14.15",
+    "soundcloud.custom.player": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.x"
