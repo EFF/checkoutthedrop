@@ -10,16 +10,18 @@ module.exports = (grunt) ->
         copy:
             main:
                 files: [
-                    {expand: true, cwd: './client',src: ['lib/**/*', 'images/**'], dest: 'build'}
+                    {expand: true, cwd: './client', src: ['lib/**/*', 'images/**'], dest: 'build'}
                 ]
         uglify:
             build:
-                files: {'./build/script/app.min.js' : ['./client/javascripts/**/*.js']}
+                files: {'./build/script/app.min.js': ['./client/javascripts/**/*.js']}
         imagemin:
             default:
                 options:
                     optimizationLevel: 4
-                files: [{expand: true, cwd: './client',src: ['images/*'], dest: 'build'}]
+                files: [
+                    {expand: true, cwd: './client', src: ['images/*'], dest: 'build'}
+                ]
         shell:
             mongo:
                 command: 'mongod'
